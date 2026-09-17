@@ -1,0 +1,2245 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VEYDRA Academy</title>
+
+    <meta name="description"
+        content="VEYDRA Academy — pusat pembelajaran dan pengembangan warga VEYDRA.">
+
+    <style>
+
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #070909;
+            color: #f2f4f3;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+
+        /* =====================================================
+           VARIABLES
+        ===================================================== */
+
+        :root {
+            --bg: #070909;
+            --bg2: #0c0f0e;
+            --card: #101413;
+            --card2: #131817;
+            --line: rgba(255,255,255,.09);
+
+            --text: #f3f5f4;
+            --muted: #8d9692;
+
+            --green: #7cffb2;
+            --green-dark: #1d6e43;
+
+            --radius: 20px;
+        }
+
+
+        /* =====================================================
+           LOADER
+        ===================================================== */
+
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: #070909;
+            z-index: 9999;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            transition: opacity .35s ease,
+                        visibility .35s ease;
+        }
+
+        #loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-content {
+            text-align: center;
+        }
+
+        .loader-logo {
+            font-size: 34px;
+            font-weight: 900;
+            letter-spacing: 5px;
+        }
+
+        .loader-accent {
+            color: var(--green);
+        }
+
+        .loader-line {
+            width: 100px;
+            height: 2px;
+            background: rgba(255,255,255,.1);
+            margin: 20px auto 0;
+            overflow: hidden;
+        }
+
+        .loader-line span {
+            display: block;
+            width: 45%;
+            height: 100%;
+            background: var(--green);
+            animation: loader 1s infinite ease-in-out;
+        }
+
+        @keyframes loader {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(230%);
+            }
+        }
+
+
+        /* =====================================================
+           NAVBAR
+        ===================================================== */
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+
+            z-index: 1000;
+
+            border-bottom: 1px solid rgba(255,255,255,.06);
+
+            background: rgba(7,9,9,.78);
+            backdrop-filter: blur(18px);
+        }
+
+        .nav-container {
+            max-width: 1250px;
+            margin: auto;
+
+            height: 76px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 25px;
+        }
+
+        .brand {
+            font-weight: 900;
+            letter-spacing: 3px;
+            font-size: 18px;
+        }
+
+        .brand span {
+            color: var(--green);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #aeb5b2;
+            font-size: 13px;
+            transition: .25s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .nav-button {
+            padding: 10px 17px;
+            border-radius: 10px;
+
+            background: var(--green);
+            color: #061009 !important;
+
+            font-weight: 800 !important;
+        }
+
+        .menu {
+            display: none;
+
+            width: 38px;
+            height: 38px;
+
+            border: 1px solid var(--line);
+            background: transparent;
+
+            color: white;
+            border-radius: 10px;
+
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .hero {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+
+            position: absolute;
+
+            width: 650px;
+            height: 650px;
+
+            right: -250px;
+            top: 100px;
+
+            background: rgba(124,255,178,.07);
+
+            filter: blur(100px);
+            border-radius: 50%;
+        }
+
+        .hero-container {
+            max-width: 1250px;
+            width: 100%;
+
+            margin: auto;
+
+            padding: 140px 25px 100px;
+
+            position: relative;
+            z-index: 2;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+
+            align-items: center;
+            gap: 8px;
+
+            border: 1px solid rgba(124,255,178,.2);
+
+            padding: 8px 12px;
+
+            border-radius: 999px;
+
+            font-size: 11px;
+            letter-spacing: 1.5px;
+
+            color: var(--green);
+
+            background: rgba(124,255,178,.04);
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+
+            border-radius: 50%;
+
+            background: var(--green);
+
+            box-shadow: 0 0 12px var(--green);
+        }
+
+        .hero h1 {
+            margin-top: 25px;
+
+            font-size: clamp(48px, 8vw, 92px);
+
+            line-height: .95;
+
+            letter-spacing: -4px;
+
+            max-width: 900px;
+        }
+
+        .hero h1 span {
+            color: var(--green);
+        }
+
+        .hero-description {
+            margin-top: 30px;
+
+            max-width: 650px;
+
+            color: var(--muted);
+
+            font-size: 17px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 12px;
+
+            margin-top: 35px;
+
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            border: 1px solid var(--line);
+
+            padding: 14px 21px;
+
+            border-radius: 12px;
+
+            cursor: pointer;
+
+            transition: .25s;
+
+            font-weight: 800;
+
+            font-size: 13px;
+        }
+
+        .btn-primary {
+            background: var(--green);
+            color: #061009;
+            border-color: var(--green);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(124,255,178,.12);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,.03);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,.07);
+        }
+
+
+        /* =====================================================
+           STATS
+        ===================================================== */
+
+        .stats {
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+
+            background: rgba(255,255,255,.015);
+        }
+
+        .stats-container {
+            max-width: 1250px;
+
+            margin: auto;
+
+            padding: 35px 25px;
+
+            display: grid;
+
+            grid-template-columns: repeat(4,1fr);
+
+            gap: 20px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat strong {
+            display: block;
+
+            font-size: 30px;
+        }
+
+        .stat span {
+            color: var(--muted);
+
+            font-size: 12px;
+
+            letter-spacing: 1px;
+        }
+
+
+        /* =====================================================
+           GENERAL SECTION
+        ===================================================== */
+
+        section {
+            max-width: 1250px;
+
+            margin: auto;
+
+            padding: 110px 25px;
+        }
+
+        .section-label {
+            color: var(--green);
+
+            font-size: 11px;
+
+            letter-spacing: 2px;
+
+            font-weight: 800;
+        }
+
+        .section-title {
+            margin-top: 12px;
+
+            font-size: clamp(32px, 5vw, 52px);
+
+            letter-spacing: -2px;
+        }
+
+        .section-description {
+            margin-top: 15px;
+
+            color: var(--muted);
+
+            max-width: 650px;
+        }
+
+
+        /* =====================================================
+           PROGRAMS
+        ===================================================== */
+
+        .program-grid {
+            margin-top: 45px;
+
+            display: grid;
+
+            grid-template-columns: repeat(3,1fr);
+
+            gap: 18px;
+        }
+
+        .program-card {
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.055),
+                    rgba(255,255,255,.015)
+                );
+
+            border: 1px solid var(--line);
+
+            border-radius: var(--radius);
+
+            padding: 30px;
+
+            min-height: 260px;
+
+            transition: .3s;
+        }
+
+        .program-card:hover {
+            transform: translateY(-5px);
+
+            border-color: rgba(124,255,178,.25);
+        }
+
+        .program-icon {
+            width: 48px;
+            height: 48px;
+
+            border-radius: 14px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: rgba(124,255,178,.08);
+
+            font-size: 22px;
+
+            margin-bottom: 25px;
+        }
+
+        .program-card h3 {
+            font-size: 21px;
+        }
+
+        .program-card p {
+            color: var(--muted);
+
+            margin-top: 10px;
+
+            font-size: 14px;
+        }
+
+        .tag {
+            display: inline-block;
+
+            margin-top: 20px;
+
+            font-size: 10px;
+
+            letter-spacing: 1px;
+
+            padding: 6px 9px;
+
+            border-radius: 999px;
+
+            background: rgba(255,255,255,.05);
+
+            color: #aeb6b2;
+        }
+
+
+        /* =====================================================
+           COURSES
+        ===================================================== */
+
+        .course-grid {
+            margin-top: 45px;
+
+            display: grid;
+
+            grid-template-columns: repeat(3,1fr);
+
+            gap: 18px;
+        }
+
+        .course {
+            border: 1px solid var(--line);
+
+            background: var(--card);
+
+            border-radius: 18px;
+
+            overflow: hidden;
+        }
+
+        .course-top {
+            height: 150px;
+
+            padding: 25px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #111715,
+                    #080a09
+                );
+
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .course-number {
+            font-size: 12px;
+
+            color: var(--green);
+
+            letter-spacing: 2px;
+        }
+
+        .course-body {
+            padding: 24px;
+        }
+
+        .course-body h3 {
+            font-size: 19px;
+        }
+
+        .course-body p {
+            color: var(--muted);
+
+            font-size: 13px;
+
+            margin-top: 8px;
+        }
+
+        .progress {
+            margin-top: 20px;
+
+            height: 5px;
+
+            border-radius: 99px;
+
+            background: rgba(255,255,255,.07);
+
+            overflow: hidden;
+        }
+
+        .progress span {
+            display: block;
+
+            height: 100%;
+
+            width: 0;
+
+            background: var(--green);
+
+            transition: width 1.2s ease;
+        }
+
+        .course-meta {
+            display: flex;
+
+            justify-content: space-between;
+
+            margin-top: 10px;
+
+            font-size: 11px;
+
+            color: var(--muted);
+        }
+
+
+        /* =====================================================
+           DASHBOARD
+        ===================================================== */
+
+        .dashboard {
+            background: var(--bg2);
+
+            border: 1px solid var(--line);
+
+            border-radius: 25px;
+
+            padding: 35px;
+
+            margin-top: 45px;
+        }
+
+        .dashboard-head {
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            align-items: center;
+
+            flex-wrap: wrap;
+        }
+
+        .dashboard-head h3 {
+            font-size: 25px;
+        }
+
+        .dashboard-head p {
+            color: var(--muted);
+
+            font-size: 13px;
+        }
+
+        .dashboard-grid {
+            margin-top: 30px;
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr 1fr;
+
+            gap: 15px;
+        }
+
+        .dashboard-item {
+            border: 1px solid var(--line);
+
+            border-radius: 15px;
+
+            padding: 20px;
+
+            background: rgba(255,255,255,.02);
+        }
+
+        .dashboard-item span {
+            display: block;
+
+            color: var(--muted);
+
+            font-size: 11px;
+
+            margin-bottom: 7px;
+        }
+
+        .dashboard-item strong {
+            font-size: 23px;
+        }
+
+
+        /* =====================================================
+           QUIZ
+        ===================================================== */
+
+        .quiz {
+            margin-top: 45px;
+
+            padding: 35px;
+
+            border-radius: 22px;
+
+            border: 1px solid var(--line);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(124,255,178,.045),
+                    rgba(255,255,255,.015)
+                );
+        }
+
+        .quiz h3 {
+            font-size: 25px;
+        }
+
+        .quiz-question {
+            margin-top: 25px;
+
+            font-size: 17px;
+
+            font-weight: 700;
+        }
+
+        .quiz-options {
+            margin-top: 20px;
+
+            display: grid;
+
+            gap: 10px;
+        }
+
+        .quiz-option {
+            padding: 14px;
+
+            border-radius: 12px;
+
+            border: 1px solid var(--line);
+
+            background: rgba(255,255,255,.02);
+
+            color: white;
+
+            text-align: left;
+
+            cursor: pointer;
+
+            transition: .2s;
+        }
+
+        .quiz-option:hover {
+            border-color: rgba(124,255,178,.3);
+        }
+
+        .quiz-result {
+            margin-top: 18px;
+
+            color: var(--green);
+
+            font-size: 13px;
+
+            min-height: 20px;
+        }
+
+
+        /* =====================================================
+           CERTIFICATE
+        ===================================================== */
+
+        .certificate {
+            margin-top: 45px;
+
+            border: 1px solid rgba(124,255,178,.15);
+
+            border-radius: 24px;
+
+            padding: 45px;
+
+            text-align: center;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(124,255,178,.07),
+                    transparent 60%
+                );
+        }
+
+        .certificate-icon {
+            font-size: 42px;
+        }
+
+        .certificate h3 {
+            margin-top: 15px;
+
+            font-size: 29px;
+        }
+
+        .certificate p {
+            max-width: 600px;
+
+            margin: 12px auto 25px;
+
+            color: var(--muted);
+        }
+
+
+        /* =====================================================
+           FAQ
+        ===================================================== */
+
+        .faq {
+            margin-top: 45px;
+
+            display: grid;
+
+            gap: 10px;
+        }
+
+        .faq-item {
+            border: 1px solid var(--line);
+
+            border-radius: 14px;
+
+            overflow: hidden;
+
+            background: rgba(255,255,255,.02);
+        }
+
+        .faq-question {
+            width: 100%;
+
+            padding: 20px;
+
+            background: transparent;
+
+            border: none;
+
+            color: white;
+
+            text-align: left;
+
+            cursor: pointer;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            font-size: 14px;
+
+            font-weight: 700;
+        }
+
+        .faq-answer {
+            max-height: 0;
+
+            overflow: hidden;
+
+            transition: .3s ease;
+
+            color: var(--muted);
+
+            font-size: 13px;
+        }
+
+        .faq-answer p {
+            padding: 0 20px 20px;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+        }
+
+        .faq-plus {
+            color: var(--green);
+
+            font-size: 18px;
+        }
+
+
+        /* =====================================================
+           CTA
+        ===================================================== */
+
+        .cta {
+            margin-top: 20px;
+
+            padding: 70px 30px;
+
+            text-align: center;
+
+            border: 1px solid var(--line);
+
+            border-radius: 25px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(124,255,178,.08),
+                    rgba(255,255,255,.02)
+                );
+        }
+
+        .cta h2 {
+            font-size: clamp(32px,5vw,55px);
+
+            letter-spacing: -2px;
+        }
+
+        .cta p {
+            max-width: 600px;
+
+            margin: 15px auto 30px;
+
+            color: var(--muted);
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        footer {
+            border-top: 1px solid var(--line);
+
+            padding: 40px 25px;
+
+            background: #050707;
+        }
+
+        .footer-container {
+            max-width: 1250px;
+
+            margin: auto;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            flex-wrap: wrap;
+        }
+
+        .footer-brand {
+            font-weight: 900;
+
+            letter-spacing: 3px;
+        }
+
+        .footer-brand span {
+            color: var(--green);
+        }
+
+        .footer-text {
+            color: var(--muted);
+
+            font-size: 12px;
+        }
+
+
+        /* =====================================================
+           BACK TO TOP
+        ===================================================== */
+
+        #topBtn {
+            position: fixed;
+
+            right: 20px;
+            bottom: 20px;
+
+            width: 45px;
+            height: 45px;
+
+            border-radius: 12px;
+
+            border: 1px solid var(--line);
+
+            background: rgba(15,18,17,.9);
+
+            color: white;
+
+            cursor: pointer;
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            transition: .3s;
+
+            z-index: 500;
+        }
+
+        #topBtn.show {
+            opacity: 1;
+
+            pointer-events: auto;
+        }
+
+
+        /* =====================================================
+           REVEAL
+        ===================================================== */
+
+        .reveal {
+            opacity: 0;
+
+            transform: translateY(25px);
+
+            transition:
+                opacity .7s ease,
+                transform .7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+
+            transform: translateY(0);
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 850px) {
+
+            .nav-links {
+                position: absolute;
+
+                top: 76px;
+
+                left: 15px;
+                right: 15px;
+
+                display: none;
+
+                flex-direction: column;
+
+                align-items: stretch;
+
+                padding: 15px;
+
+                background: #0b0e0d;
+
+                border: 1px solid var(--line);
+
+                border-radius: 15px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                padding: 12px;
+            }
+
+            .menu {
+                display: block;
+            }
+
+            .program-grid,
+            .course-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .stats-container {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+        }
+
+
+        @media (max-width: 560px) {
+
+            .hero h1 {
+                letter-spacing: -2px;
+            }
+
+            section {
+                padding: 80px 18px;
+            }
+
+            .hero-container {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .program-grid,
+            .course-grid,
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-container {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .dashboard,
+            .quiz,
+            .certificate {
+                padding: 25px;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     LOADER
+===================================================== -->
+
+<div id="loader">
+
+    <div class="loader-content">
+
+        <div class="loader-logo">
+            VEYDRA<span class="loader-accent">.</span>
+        </div>
+
+        <div style="
+            margin-top:5px;
+            color:#777;
+            font-size:11px;
+            letter-spacing:3px;
+        ">
+            ACADEMY
+        </div>
+
+        <div class="loader-line">
+            <span></span>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<nav>
+
+    <div class="nav-container">
+
+        <a href="#home" class="brand">
+            VEYDRA<span>.</span>ACADEMY
+        </a>
+
+        <div class="nav-links" id="navLinks">
+
+            <a href="#home">Home</a>
+
+            <a href="#program">Program</a>
+
+            <a href="#courses">Courses</a>
+
+            <a href="#quiz">Quiz</a>
+
+            <a href="#certificate">Certificate</a>
+
+            <a href="#faq">FAQ</a>
+
+            <a href="#start" class="nav-button">
+                MULAI BELAJAR
+            </a>
+
+        </div>
+
+        <button class="menu" id="menu">
+            ☰
+        </button>
+
+    </div>
+
+</nav>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<header class="hero" id="home">
+
+    <div class="hero-container">
+
+        <div class="eyebrow">
+
+            <span class="dot"></span>
+
+            OFFICIAL LEARNING PLATFORM
+
+        </div>
+
+
+        <h1>
+
+            Learn.
+            <br>
+
+            <span>Grow.</span>
+            <br>
+
+            Become VEYDRA.
+
+        </h1>
+
+
+        <p class="hero-description">
+
+            VEYDRA Academy adalah pusat pembelajaran
+            untuk membantu warga memahami dunia VEYDRA,
+            roleplay, komunitas, serta berbagai kemampuan
+            yang dibutuhkan untuk berkembang bersama.
+
+        </p>
+
+
+        <div class="hero-actions">
+
+            <a
+                href="#courses"
+                class="btn btn-primary"
+            >
+                MULAI BELAJAR
+            </a>
+
+            <a
+                href="#program"
+                class="btn btn-secondary"
+            >
+                LIHAT PROGRAM
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     STATS
+===================================================== -->
+
+<div class="stats">
+
+    <div class="stats-container">
+
+        <div class="stat">
+
+            <strong>06</strong>
+
+            <span>PROGRAM</span>
+
+        </div>
+
+
+        <div class="stat">
+
+            <strong>12+</strong>
+
+            <span>LESSONS</span>
+
+        </div>
+
+
+        <div class="stat">
+
+            <strong>04</strong>
+
+            <span>LEVEL</span>
+
+        </div>
+
+
+        <div class="stat">
+
+            <strong>∞</strong>
+
+            <span>OPPORTUNITY</span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     PROGRAM
+===================================================== -->
+
+<section id="program">
+
+    <div class="section-label reveal">
+        ACADEMY PROGRAM
+    </div>
+
+    <h2 class="section-title reveal">
+        Pilih jalur belajarmu.
+    </h2>
+
+    <p class="section-description reveal">
+
+        Materi VEYDRA Academy dirancang untuk membantu
+        warga memahami berbagai aspek kehidupan dan
+        aktivitas di kota VEYDRA.
+
+    </p>
+
+
+    <div class="program-grid">
+
+
+        <div class="program-card reveal">
+
+            <div class="program-icon">
+                🎓
+            </div>
+
+            <h3>
+                Basic Academy
+            </h3>
+
+            <p>
+                Materi dasar mengenai VEYDRA,
+                peraturan, sistem kota, dan
+                cara menjadi warga.
+            </p>
+
+            <span class="tag">
+                BEGINNER
+            </span>
+
+        </div>
+
+
+        <div class="program-card reveal">
+
+            <div class="program-icon">
+                🎭
+            </div>
+
+            <h3>
+                Roleplay Academy
+            </h3>
+
+            <p>
+                Pelajari dasar roleplay,
+                karakter, interaksi, dan
+                membangun cerita.
+            </p>
+
+            <span class="tag">
+                ROLEPLAY
+            </span>
+
+        </div>
+
+
+        <div class="program-card reveal">
+
+            <div class="program-icon">
+                💼
+            </div>
+
+            <h3>
+                Career Academy
+            </h3>
+
+            <p>
+                Kenali berbagai aktivitas,
+                pekerjaan, dan peluang
+                yang tersedia di VEYDRA.
+            </p>
+
+            <span class="tag">
+                CAREER
+            </span>
+
+        </div>
+
+
+        <div class="program-card reveal">
+
+            <div class="program-icon">
+                🏛️
+            </div>
+
+            <h3>
+                Civic Academy
+            </h3>
+
+            <p>
+                Pelajari kehidupan masyarakat,
+                fasilitas, pelayanan, dan
+                aktivitas kota.
+            </p>
+
+            <span class="tag">
+                CIVIC
+            </span>
+
+        </div>
+
+
+        <div class="program-card reveal">
+
+            <div class="program-icon">
+                🎥
+            </div>
+
+            <h3>
+                Creator Academy
+            </h3>
+
+            <p>
+                Belajar membuat konten,
+                streaming, storytelling,
+                dan kreativitas.
+            </p>
+
+            <span class="tag">
+                CREATOR
+            </span>
+
+        </div>
+
+
+        <div class="program-card reveal">
+
+            <div class="program-icon">
+                🏆
+            </div>
+
+            <h3>
+                Advanced Academy
+            </h3>
+
+            <p>
+                Materi lanjutan untuk warga
+                yang ingin meningkatkan
+                kemampuan dan pengalaman.
+            </p>
+
+            <span class="tag">
+                ADVANCED
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     COURSES
+===================================================== -->
+
+<section id="courses">
+
+    <div class="section-label reveal">
+        FEATURED COURSES
+    </div>
+
+    <h2 class="section-title reveal">
+        Mulai dari dasar.
+    </h2>
+
+    <p class="section-description reveal">
+
+        Selesaikan materi secara bertahap dan
+        kembangkan kemampuanmu.
+
+    </p>
+
+
+    <div class="course-grid">
+
+
+        <div class="course reveal">
+
+            <div class="course-top">
+
+                <span class="course-number">
+                    COURSE 01
+                </span>
+
+            </div>
+
+            <div class="course-body">
+
+                <h3>
+                    Mengenal VEYDRA
+                </h3>
+
+                <p>
+                    Pengenalan kota, sistem,
+                    komunitas, dan kehidupan
+                    di VEYDRA.
+                </p>
+
+                <div class="progress">
+                    <span style="width:35%;"></span>
+                </div>
+
+                <div class="course-meta">
+
+                    <span>
+                        35% selesai
+                    </span>
+
+                    <span>
+                        3 Lessons
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="course reveal">
+
+            <div class="course-top">
+
+                <span class="course-number">
+                    COURSE 02
+                </span>
+
+            </div>
+
+            <div class="course-body">
+
+                <h3>
+                    Dasar Roleplay
+                </h3>
+
+                <p>
+                    Pelajari konsep IC, OOC,
+                    MG, PG, RDM, dan aturan
+                    dasar roleplay.
+                </p>
+
+                <div class="progress">
+                    <span style="width:60%;"></span>
+                </div>
+
+                <div class="course-meta">
+
+                    <span>
+                        60% selesai
+                    </span>
+
+                    <span>
+                        4 Lessons
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="course reveal">
+
+            <div class="course-top">
+
+                <span class="course-number">
+                    COURSE 03
+                </span>
+
+            </div>
+
+            <div class="course-body">
+
+                <h3>
+                    Menjadi Warga
+                </h3>
+
+                <p>
+                    Panduan kehidupan warga,
+                    interaksi, pekerjaan, dan
+                    aktivitas kota.
+                </p>
+
+                <div class="progress">
+                    <span style="width:20%;"></span>
+                </div>
+
+                <div class="course-meta">
+
+                    <span>
+                        20% selesai
+                    </span>
+
+                    <span>
+                        5 Lessons
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     LEARNING DASHBOARD
+===================================================== -->
+
+<section id="start">
+
+    <div class="section-label reveal">
+        LEARNING DASHBOARD
+    </div>
+
+    <h2 class="section-title reveal">
+        Pantau perkembanganmu.
+    </h2>
+
+
+    <div class="dashboard reveal">
+
+        <div class="dashboard-head">
+
+            <div>
+
+                <h3>
+                    Your Academy Progress
+                </h3>
+
+                <p>
+                    Perjalanan belajar dimulai dari
+                    satu langkah kecil.
+                </p>
+
+            </div>
+
+            <div class="btn btn-secondary">
+                LEVEL 01
+            </div>
+
+        </div>
+
+
+        <div class="dashboard-grid">
+
+            <div class="dashboard-item">
+
+                <span>
+                    COURSE COMPLETED
+                </span>
+
+                <strong>
+                    0 / 6
+                </strong>
+
+            </div>
+
+
+            <div class="dashboard-item">
+
+                <span>
+                    LESSON COMPLETED
+                </span>
+
+                <strong>
+                    4
+                </strong>
+
+            </div>
+
+
+            <div class="dashboard-item">
+
+                <span>
+                    ACADEMY XP
+                </span>
+
+                <strong>
+                    120 XP
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     QUIZ
+===================================================== -->
+
+<section id="quiz">
+
+    <div class="section-label reveal">
+        KNOWLEDGE CHECK
+    </div>
+
+    <h2 class="section-title reveal">
+        Uji pengetahuanmu.
+    </h2>
+
+    <p class="section-description reveal">
+
+        Coba jawab pertanyaan berikut untuk
+        menguji pemahaman dasar roleplay.
+
+    </p>
+
+
+    <div class="quiz reveal">
+
+        <h3>
+            Quick Quiz
+        </h3>
+
+        <div class="quiz-question">
+
+            Apa yang dimaksud dengan Metagaming?
+
+        </div>
+
+
+        <div class="quiz-options">
+
+            <button
+                class="quiz-option"
+                onclick="answerQuiz(false)"
+            >
+                A. Menggunakan informasi OOC
+                untuk kepentingan IC
+            </button>
+
+
+            <button
+                class="quiz-option"
+                onclick="answerQuiz(true)"
+            >
+                B. Menggunakan informasi di luar RP
+                untuk kepentingan karakter
+            </button>
+
+
+            <button
+                class="quiz-option"
+                onclick="answerQuiz(false)"
+            >
+                C. Membuat karakter baru
+            </button>
+
+
+            <button
+                class="quiz-option"
+                onclick="answerQuiz(false)"
+            >
+                D. Mengubah nama karakter
+            </button>
+
+        </div>
+
+
+        <div
+            class="quiz-result"
+            id="quizResult"
+        ></div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CERTIFICATE
+===================================================== -->
+
+<section id="certificate">
+
+    <div class="section-label reveal">
+        VEYDRA CERTIFICATION
+    </div>
+
+    <h2 class="section-title reveal">
+        Earn your certificate.
+    </h2>
+
+
+    <div class="certificate reveal">
+
+        <div class="certificate-icon">
+            🎓
+        </div>
+
+        <h3>
+            VEYDRA Academy Certificate
+        </h3>
+
+        <p>
+
+            Setelah menyelesaikan program tertentu
+            dan memenuhi persyaratan yang ditentukan,
+            peserta dapat memperoleh sertifikat
+            sebagai bukti penyelesaian pembelajaran.
+
+        </p>
+
+        <button
+            class="btn btn-primary"
+            onclick="certificateInfo()"
+        >
+            LIHAT INFORMASI
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FAQ
+===================================================== -->
+
+<section id="faq">
+
+    <div class="section-label reveal">
+        FREQUENTLY ASKED QUESTIONS
+    </div>
+
+    <h2 class="section-title reveal">
+        Pertanyaan umum.
+    </h2>
+
+
+    <div class="faq">
+
+
+        <div class="faq-item reveal">
+
+            <button
+                class="faq-question"
+                onclick="toggleFAQ(this)"
+            >
+
+                Apa itu VEYDRA Academy?
+
+                <span class="faq-plus">
+                    +
+                </span>
+
+            </button>
+
+            <div class="faq-answer">
+
+                <p>
+                    VEYDRA Academy adalah platform
+                    pembelajaran yang menyediakan
+                    materi mengenai VEYDRA, roleplay,
+                    komunitas, dan berbagai kemampuan
+                    lainnya.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="faq-item reveal">
+
+            <button
+                class="faq-question"
+                onclick="toggleFAQ(this)"
+            >
+
+                Apakah Academy wajib diikuti?
+
+                <span class="faq-plus">
+                    +
+                </span>
+
+            </button>
+
+            <div class="faq-answer">
+
+                <p>
+                    Ketentuan mengenai program yang
+                    wajib atau opsional dapat berbeda
+                    sesuai program dan kebijakan
+                    VEYDRA.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="faq-item reveal">
+
+            <button
+                class="faq-question"
+                onclick="toggleFAQ(this)"
+            >
+
+                Apakah ada sertifikat?
+
+                <span class="faq-plus">
+                    +
+                </span>
+
+            </button>
+
+            <div class="faq-answer">
+
+                <p>
+                    Beberapa program dapat menyediakan
+                    sertifikat setelah peserta memenuhi
+                    persyaratan penyelesaian program.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="faq-item reveal">
+
+            <button
+                class="faq-question"
+                onclick="toggleFAQ(this)"
+            >
+
+                Apakah VEYDRA Academy gratis?
+
+                <span class="faq-plus">
+                    +
+                </span>
+
+            </button>
+
+            <div class="faq-answer">
+
+                <p>
+                    Status biaya dapat berbeda
+                    berdasarkan program yang tersedia.
+                    Informasi resmi akan diumumkan
+                    melalui kanal VEYDRA.
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CTA
+===================================================== -->
+
+<section>
+
+    <div class="cta reveal">
+
+        <h2>
+            Ready to learn?
+        </h2>
+
+        <p>
+
+            Mulai perjalananmu di VEYDRA Academy
+            dan kembangkan kemampuanmu bersama
+            komunitas.
+
+        </p>
+
+        <a
+            href="#courses"
+            class="btn btn-primary"
+        >
+            START LEARNING
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <div class="footer-container">
+
+        <div class="footer-brand">
+            VEYDRA<span>.</span>ACADEMY
+        </div>
+
+        <div class="footer-text">
+            © 2026 VEYDRA Academy. All rights reserved.
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- =====================================================
+     BACK TO TOP
+===================================================== -->
+
+<button
+    id="topBtn"
+    onclick="window.scrollTo({
+        top:0,
+        behavior:'smooth'
+    })"
+>
+    ↑
+</button>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+
+/* =====================================================
+   LOADER
+===================================================== */
+
+window.addEventListener("load", function() {
+
+    setTimeout(function() {
+
+        document
+            .getElementById("loader")
+            .classList
+            .add("hidden");
+
+    }, 250);
+
+});
+
+
+/* =====================================================
+   MOBILE MENU
+===================================================== */
+
+const menu =
+    document.getElementById("menu");
+
+const navLinks =
+    document.getElementById("navLinks");
+
+
+menu.addEventListener("click", function() {
+
+    navLinks.classList.toggle("active");
+
+});
+
+
+document
+    .querySelectorAll(".nav-links a")
+    .forEach(function(link) {
+
+        link.addEventListener("click", function() {
+
+            navLinks.classList.remove("active");
+
+        });
+
+    });
+
+
+/* =====================================================
+   SCROLL REVEAL
+===================================================== */
+
+const observer =
+    new IntersectionObserver(
+
+        function(entries) {
+
+            entries.forEach(function(entry) {
+
+                if (entry.isIntersecting) {
+
+                    entry.target.classList.add("visible");
+
+                }
+
+            });
+
+        },
+
+        {
+            threshold: 0.12
+        }
+
+    );
+
+
+document
+    .querySelectorAll(".reveal")
+    .forEach(function(element) {
+
+        observer.observe(element);
+
+    });
+
+
+/* =====================================================
+   BACK TO TOP
+===================================================== */
+
+const topBtn =
+    document.getElementById("topBtn");
+
+
+window.addEventListener("scroll", function() {
+
+    if (window.scrollY > 500) {
+
+        topBtn.classList.add("show");
+
+    } else {
+
+        topBtn.classList.remove("show");
+
+    }
+
+});
+
+
+/* =====================================================
+   QUIZ
+===================================================== */
+
+function answerQuiz(correct) {
+
+    const result =
+        document.getElementById("quizResult");
+
+    if (correct) {
+
+        result.innerHTML =
+            "✓ Benar! Jawaban kamu tepat.";
+
+    } else {
+
+        result.innerHTML =
+            "✕ Belum tepat. Coba pahami kembali konsep Metagaming.";
+
+    }
+
+}
+
+
+/* =====================================================
+   CERTIFICATE
+===================================================== */
+
+function certificateInfo() {
+
+    alert(
+        "Informasi sertifikat akan tersedia setelah sistem sertifikasi VEYDRA Academy resmi dibuka."
+    );
+
+}
+
+
+/* =====================================================
+   FAQ
+===================================================== */
+
+function toggleFAQ(button) {
+
+    const item =
+        button.parentElement;
+
+    document
+        .querySelectorAll(".faq-item")
+        .forEach(function(other) {
+
+            if (other !== item) {
+
+                other.classList.remove("active");
+
+            }
+
+        });
+
+    item.classList.toggle("active");
+
+}
+
+</script>
+
+
+</body>
+</html>
